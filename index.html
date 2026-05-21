@@ -120,6 +120,104 @@ section{padding:70px 0}
 .stars{color:#ffc107;font-size:1.1rem;margin-bottom:10px}
 
 /* AREAS DE ATENDIMENTO */
+.comunidades-abelardo {
+  background: #f7f9fc;
+  padding: 70px 20px;
+}
+
+.comunidades-abelardo h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #1a3a5c;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.comunidades-abelardo .subtitulo-secao {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.comunidades-abelardo .areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.comunidades-abelardo .area-item {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #f39200;
+  font-weight: 600;
+  color: #1a3a5c;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.comunidades-abelardo .area-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.cta-comunidades {
+  text-align: center;
+  margin-top: 50px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.cta-comunidades p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.btn-whatsapp-secao {
+  display: inline-block;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-whatsapp-secao:hover {
+  background: #1ebe57;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .comunidades-abelardo h2 {
+    font-size: 1.5rem;
+  }
+  .comunidades-abelardo .areas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .comunidades-abelardo .area-item {
+    font-size: 0.9rem;
+    padding: 12px 14px;
+  }
+}
+
+
+
+
+  
 .areas{background:#0f5132;color:#fff}
 .areas h2{color:#fff}
 .areas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:30px}
@@ -358,12 +456,39 @@ section{padding:70px 0}
   </div>
 </section>
 
+<!-- SEÇÃO: COMUNIDADES DE ABELARDO LUZ (PRIORIDADE) -->
+<section class="comunidades-abelardo">
+  <div class="container">
+    <h2>Atendemos Toda Abelardo Luz: Comunidades, Assentamentos e Linhas Rurais</h2>
+    <p class="subtitulo-secao">
+      Vamos até a sua propriedade rural com equipamento completo. Atendimento hidráulico especializado em todos os assentamentos, aldeias, linhas e comunidades de Abelardo Luz - SC.
+    </p>
+
+    <div class="areas-grid">
+      <div class="area-item">📍 Alegre do Marco</div>
+      <div class="area-item">📍 Nova Aurora</div>
+      <div class="area-item">📍 Aldeia Indígena Toldo Imbú</div>
+      <div class="area-item">📍 Assentamento José Maria</div>
+      <div class="area-item">📍 Assentamento 13 de Novembro</div>
+      <div class="area-item">📍 Assentamento Recanto Olho D'Água</div>
+      <div class="area-item">📍 Assentamento Bela Vista</div>
+      <div class="area-item">📍 Assentamento Volta Grande</div>
+      <div class="area-item">📍 Assentamento Maria Silverston</div>
+      <div class="area-item">📍 Assentamento Roseli Nunes</div>
+      <div class="area-item">📍 Serra dos Buracos</div>
+      <div class="area-item">📍 Linha Anta Gorda</div>
+      <div class="area-item">📍 Linha Ervalinho</div>
+      <div class="area-item">📍 Linha Tava</div>
+    </div>
+  </div>
+</section>
+
 <!-- ÁREAS DE ATENDIMENTO -->
 <section class="areas" id="areas">
   <div class="container">
     <div class="section-header">
       <span class="eyebrow" style="background:#ffc107;color:#0f5132">Onde atuamos</span>
-      <h2>Áreas de Atendimento no Oeste Catarinense</h2>
+      <h2>Mais áreas de Atendimento no Oeste Catarinense</h2>
       <p style="color:#ddd">Atendemos toda a região com agilidade e atendimento especializado no agro.</p>
     </div>
     <div class="areas-grid">
@@ -375,6 +500,7 @@ section{padding:70px 0}
       <div class="area-item">📍 Bom Jesus</div>
       <div class="area-item">📍 Ipuaçu</div>
       <div class="area-item">📍 Vargeão</div>
+      <div class="area-item">📍 Chapecóz</div>
     </div>
   </div>
 </section>
