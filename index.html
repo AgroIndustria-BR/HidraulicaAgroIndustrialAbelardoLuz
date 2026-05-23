@@ -72,6 +72,7 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 }
 
 /* LOGO TEXTO no header (Hidráulica verde + AgroIndustrial amarelo) */
+/* ✅ CORRIGIDO: visível por padrão, JS apenas esconde quando logo PNG flutuante está na tela */
 .logo-text{
   display:flex;
   align-items:center;
@@ -81,12 +82,10 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
   font-size:1.4rem;
   color:#0f5132;
   line-height:1.1;
-  /* Fica oculto enquanto a logo PNG flutuante está visível */
-  opacity:0;
+  opacity:1;
   transition:opacity .3s ease;
-  pointer-events:none;
 }
-.logo-text.is-visible{opacity:1;pointer-events:auto}
+.logo-text.is-hidden{opacity:0;pointer-events:none}
 .logo-text .logo-icon{
   width:44px;height:44px;background:#0f5132;color:#ffc107;
   border-radius:50%;display:flex;align-items:center;justify-content:center;
@@ -220,12 +219,12 @@ section{padding:70px 0}
 .faq{background:#f8f9fa}
 .faq-list{max-width:850px;margin:0 auto}
 .faq-item{background:#fff;margin-bottom:12px;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.faq-question{width:100%;padding:20px 25px;text-align:left;background:#fff;font-weight:700;color:#0f5132;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.faq-question{width:100%;padding:20px 25px;text-align:left;background:#fff;font-weight:700;color:#0f5132;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;transition:background .2s;gap:15px}
 .faq-question:hover{background:#f8f9fa}
-.faq-question::after{content:'+';font-size:1.8rem;color:#ffc107;transition:transform .3s;font-weight:400}
+.faq-question::after{content:'+';font-size:1.8rem;color:#ffc107;transition:transform .3s;font-weight:400;flex-shrink:0}
 .faq-item.active .faq-question::after{transform:rotate(45deg)}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 25px}
-.faq-item.active .faq-answer{max-height:500px;padding:0 25px 20px}
+.faq-item.active .faq-answer{max-height:600px;padding:0 25px 20px}
 .faq-answer p{color:#555;line-height:1.7}
 
 /* MAPA */
@@ -306,7 +305,7 @@ section{padding:70px 0}
 <!-- HEADER STICKY (sempre visível) — logo texto à esquerda + menu à direita -->
 <header class="header" id="mainHeader">
   <div class="container header-content">
-    <a href="#" class="logo-text" id="logoText" aria-label="Hidráulica AgroIndustrial">
+    <a href="#" class="logo-text is-hidden" id="logoText" aria-label="Hidráulica AgroIndustrial">
       <span class="logo-icon">🔧</span>
       <span>Hidráulica<br><small>AgroIndustrial</small></span>
     </a>
@@ -562,7 +561,7 @@ section{padding:70px 0}
   </div>
 </section>
 
-<!-- FAQ — Adicionada pergunta "Vocês dão garantia no serviço?" (refazemos sem custo) -->
+<!-- FAQ — 7 PERGUNTAS (juntei "atendimento no campo" + "emergências" em uma só) -->
 <section class="faq" id="faq">
   <div class="container">
     <div class="section-header">
@@ -571,36 +570,32 @@ section{padding:70px 0}
     </div>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-question">Vocês fazem atendimento no campo ou só na oficina?</button>
-        <div class="faq-answer"><p>Atendemos das duas formas. Para serviços simples, como troca de mangueira, conseguimos ir até a propriedade na região de Abelardo Luz e cidades vizinhas. Para reparos mais complexos, como recuperação de cilindros ou bombas, o serviço é feito na oficina, onde temos toda a estrutura técnica necessária.</p></div>
+        <button class="faq-question" type="button">Vocês atendem no local da fazenda ou só na oficina?</button>
+        <div class="faq-answer"><p>Atendemos das duas formas. Para serviços simples (como troca de mangueira) e <strong>emergências com máquinas que não podem ser deslocadas</strong>, vamos até a propriedade em todo o Oeste Catarinense, com prioridade durante plantio e colheita. Para reparos complexos, como recuperação de cilindros ou bombas, o serviço é feito na oficina, onde temos toda a estrutura técnica.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Vocês atendem no local da fazenda em emergências?</button>
-        <div class="faq-answer"><p>Sim. Para emergências e máquinas que não podem ser deslocadas, vamos até a propriedade. Atendemos todo o Oeste Catarinense, com prioridade para urgências durante o plantio e a colheita.</p></div>
+        <button class="faq-question" type="button">Quanto tempo leva o reparo de um cilindro hidráulico?</button>
+        <div class="faq-answer"><p>Depende do estado do cilindro. Reparos simples de vedação ficam prontos em até <strong>24 horas</strong>. Recuperações completas com retífica de haste ou troca de peças levam de <strong>2 a 5 dias úteis</strong>. Sempre damos um prazo claro junto com o orçamento.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Quanto tempo leva o reparo de um cilindro hidráulico?</button>
-        <div class="faq-answer"><p>Depende do tipo de cilindro e do que precisa ser feito. Reparos simples de vedação ficam prontos no mesmo dia ou em 24 horas. Reparos que envolvem retífica de haste ou troca de peças podem levar de 2 a 5 dias úteis. Sempre damos um prazo claro junto com o orçamento.</p></div>
+        <button class="faq-question" type="button">Vocês fazem mangueiras hidráulicas na hora?</button>
+        <div class="faq-answer"><p>Sim. Fazemos a confecção imediata com <strong>prensagem de terminais</strong>. Temos estoque de diversos diâmetros e pressões para fabricar a maioria das medidas no momento. Em casos de medidas especiais ou conexões importadas, pode haver um pequeno tempo de espera para conseguir o material correto.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Vocês atendem quais marcas de tratores e colheitadeiras?</button>
-        <div class="faq-answer"><p>Atendemos todas as principais marcas do mercado agrícola: John Deere, Massey Ferguson, New Holland, Valtra, Case, Stara, Jacto, entre outras. Por ser uma oficina especializada em hidráulica, nosso trabalho é compatível com qualquer fabricante de máquina ou implemento.</p></div>
+        <button class="faq-question" type="button">Vocês atendem quais marcas de tratores e colheitadeiras?</button>
+        <div class="faq-answer"><p>Atendemos todas as principais marcas do mercado agrícola: <strong>John Deere, Massey Ferguson, New Holland, Valtra, Case, Stara, Jacto</strong>, entre outras. Por ser uma oficina especializada em hidráulica, nosso trabalho é compatível com sistemas hidráulicos de qualquer fabricante.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Vocês fazem mangueiras hidráulicas na hora?</button>
-        <div class="faq-answer"><p>Sim. Temos estoque de mangueiras e conexões para fabricar a maioria das medidas no momento, com prensagem de terminais. Em casos de medidas especiais ou conexões importadas, pode haver um pequeno tempo de espera para conseguir o material correto.</p></div>
+        <button class="faq-question" type="button">O orçamento é cobrado?</button>
+        <div class="faq-answer"><p>Não. A avaliação técnica e o orçamento são <strong>totalmente gratuitos</strong>. Só executamos o serviço após a sua aprovação — sem surpresas, sem custos escondidos.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">O orçamento é cobrado?</button>
-        <div class="faq-answer"><p>Não. A avaliação técnica e o orçamento são totalmente gratuitos. Só executamos o serviço após a sua aprovação — sem surpresas.</p></div>
+        <button class="faq-question" type="button">Como faço para pedir um orçamento?</button>
+        <div class="faq-answer"><p>O jeito mais rápido é pelo <strong>WhatsApp</strong>: envie foto da peça ou descreva o problema e nossa equipe técnica responde com orientação inicial. Você também pode ligar diretamente ou trazer a peça na oficina em Abelardo Luz.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Como faço para pedir um orçamento?</button>
-        <div class="faq-answer"><p>O jeito mais rápido é pelo WhatsApp: envie foto da peça ou descreva o problema e nossa equipe técnica responde com orientação inicial. Você também pode ligar diretamente ou trazer a peça na oficina em Abelardo Luz.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Vocês trabalham com garantia? E se o problema voltar?</button>
-        <div class="faq-answer"><p>Sim. Todo serviço executado tem garantia sobre a mão de obra e sobre as peças que utilizamos, dentro das condições normais de uso. <strong>Se o mesmo problema voltar dentro do prazo da garantia, refazemos o serviço sem custo.</strong> O prazo varia conforme o tipo de reparo e é informado no orçamento.</p></div>
+        <button class="faq-question" type="button">Vocês trabalham com garantia? E se o problema voltar?</button>
+        <div class="faq-answer"><p>Sim. Todo reparo tem garantia sobre a mão de obra e sobre as peças que utilizamos, dentro das condições normais de uso. <strong>Se o mesmo problema voltar dentro do prazo da garantia, refazemos o serviço sem custo.</strong> O prazo varia conforme o tipo de reparo e é sempre informado no orçamento.</p></div>
       </div>
     </div>
   </div>
@@ -725,17 +720,125 @@ section{padding:70px 0}
 }
 </script>
 
-<!-- JSON-LD: FAQPage (atualizada com pergunta de emergência e garantia detalhada) -->
+<!-- JSON-LD: FAQPage (7 perguntas) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"FAQPage",
   "mainEntity":[
-    {"@type":"Question","name":"Vocês fazem atendimento no campo ou só na oficina?","acceptedAnswer":{"@type":"Answer","text":"Atendemos das duas formas. Para serviços simples conseguimos ir à propriedade na região de Abelardo Luz. Reparos complexos como cilindros e bombas são feitos na oficina."}},
-    {"@type":"Question","name":"Vocês atendem no local da fazenda em emergências?","acceptedAnswer":{"@type":"Answer","text":"Sim. Para emergências e máquinas que não podem ser deslocadas, vamos até a propriedade. Atendemos todo o Oeste Catarinense com prioridade para urgências."}},
+    {"@type":"Question","name":"Vocês atendem no local da fazenda ou só na oficina?","acceptedAnswer":{"@type":"Answer","text":"Atendemos das duas formas. Para serviços simples e emergências com máquinas que não podem ser deslocadas, vamos até a propriedade em todo o Oeste Catarinense. Reparos complexos como cilindros e bombas são feitos na oficina."}},
     {"@type":"Question","name":"Quanto tempo leva o reparo de um cilindro hidráulico?","acceptedAnswer":{"@type":"Answer","text":"Reparos simples de vedação ficam prontos em 24h. Reparos com retífica ou troca de peças levam de 2 a 5 dias úteis."}},
-    {"@type":"Question","name":"Vocês atendem quais marcas de tratores e colheitadeiras?","acceptedAnswer":{"@type":"Answer","text":"Atendemos John Deere, Massey Ferguson, New Holland, Valtra, Case, Stara, Jacto e outras marcas. Por ser oficina hidráulica especializada, o serviço é compatível com qualquer fabricante."}},
-    {"@type":"Question","name":"Vocês fazem mangueiras hidráulicas na hora?","acceptedAnswer":{"@type":"Answer","text":"Sim, temos estoque de mangueiras e conexões para fabricar a maioria das medidas na hora, com prensagem de terminais."}},
+    {"@type":"Question","name":"Vocês fazem mangueiras hidráulicas na hora?","acceptedAnswer":{"@type":"Answer","text":"Sim, fazemos confecção imediata com prensagem de terminais. Temos estoque de diversos diâmetros e pressões."}},
+    {"@type":"Question","name":"Vocês atendem quais marcas de tratores e colheitadeiras?","acceptedAnswer":{"@type":"Answer","text":"Atendemos John Deere, Massey Ferguson, New Holland, Valtra, Case, Stara, Jacto e outras marcas. O serviço é compatível com qualquer fabricante."}},
     {"@type":"Question","name":"O orçamento é cobrado?","acceptedAnswer":{"@type":"Answer","text":"Não. Avaliação técnica e orçamento são gratuitos. Só executamos o serviço após sua aprovação."}},
-    {"@type":"Question","name":"Como faço para
-$$
+    {"@type":"Question","name":"Como faço para pedir um orçamento?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp envie foto ou descreva o problema, ou ligue diretamente para nossa equipe."}},
+    {"@type":"Question","name":"Vocês trabalham com garantia? E se o problema voltar?","acceptedAnswer":{"@type":"Answer","text":"Sim. Todo reparo tem garantia sobre mão de obra e peças. Se o mesmo problema voltar dentro do prazo, refazemos o serviço sem custo."}}
+  ]
+}
+</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Hidráulica AgroIndustrial",
+  "url":"https://agroindustria-br.github.io/HidraulicaAgroIndustrialAbelardoLuz/",
+  "logo":"https://raw.githubusercontent.com/AgroIndustria-BR/HidraulicaAgroIndustrialAbelardoLuz/refs/heads/main/logo-empresa-hidraulica-agroindustrial-png.png",
+  "contactPoint":{
+    "@type":"ContactPoint",
+    "telephone":"+5551992521295",
+    "contactType":"customer service",
+    "areaServed":"BR",
+    "availableLanguage":"Portuguese"
+  }
+}
+</script>
+
+<!-- ✅ SCRIPTS CORRIGIDOS: FAQ accordion + Lazy load imagem/vídeo + Toggle logo header/flutuante -->
+<script>
+// ====== FAQ ACCORDION ======
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.classList.toggle('active');
+  });
+});
+
+// ====== FECHA MENU MOBILE AO CLICAR NUM LINK ======
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('nav').classList.remove('active'));
+});
+
+// ====== TOGGLE: LOGO PNG FLUTUANTE x LOGO TEXTO NO HEADER ======
+// Enquanto o sentinel está visível (topo da página) → mostra PNG flutuante, esconde texto
+// Quando o sentinel sai da tela (rolou) → esconde PNG, mostra texto no header
+const sentinel = document.getElementById('scrollSentinel');
+const floatLogo = document.getElementById('floatLogo');
+const logoText = document.getElementById('logoText');
+
+if (sentinel && floatLogo && logoText) {
+  const headerObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Topo da página: logo PNG flutuante visível
+        floatLogo.classList.remove('is-hidden');
+        logoText.classList.add('is-hidden');
+      } else {
+        // Rolou: logo texto aparece no header
+        floatLogo.classList.add('is-hidden');
+        logoText.classList.remove('is-hidden');
+      }
+    });
+  }, { threshold: 0 });
+  headerObs.observe(sentinel);
+}
+
+// ====== LAZY LOAD: IMAGEM SOBRE + VÍDEO ======
+window.addEventListener('load', () => {
+  // Imagens com classe lazy-img
+  const lazyImgs = document.querySelectorAll('img.lazy-img[data-src]');
+  if ('IntersectionObserver' in window) {
+    const imgObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          obs.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+    lazyImgs.forEach(img => imgObs.observe(img));
+  } else {
+    // Fallback: carrega tudo
+    lazyImgs.forEach(img => {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+    });
+  }
+
+  // Vídeo do Belarmino
+  const video = document.getElementById('belarminoVideo');
+  if (video) {
+    const source = video.querySelector('source[data-src]');
+    if (source && 'IntersectionObserver' in window) {
+      const videoObs = new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting) {
+          source.src = source.dataset.src;
+          source.removeAttribute('data-src');
+          video.load();
+          obs.unobserve(video);
+        }
+      }, { rootMargin: '300px' });
+      videoObs.observe(video);
+    } else if (source) {
+      source.src = source.dataset.src;
+      source.removeAttribute('data-src');
+      video.load();
+    }
+  }
+});
+</script>
+
+</body>
+</html>
