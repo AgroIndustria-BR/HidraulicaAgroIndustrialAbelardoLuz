@@ -50,36 +50,48 @@ h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;margin-bottom:1rem}
 h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 
 /* TOPBAR */
-.topbar{background:#0f5132;color:#fff;padding:8px 0;font-size:14px}
+.topbar{background:#0f5132;color:#fff;padding:8px 0;font-size:14px;position:relative;z-index:50}
 .topbar-content{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .topbar a{display:inline-flex;align-items:center;gap:6px}
 .topbar a:hover{color:#ffc107}
 
-/* ★ LOGO GRANDE NO TOPO (visível só quando usuário está no topo) */
-.hero-logo{
-  background:#fff;
-  padding:25px 0;
-  text-align:center;
-  border-bottom:1px solid #eee;
+/* ★ LOGO FLUTUANTE no canto superior esquerdo (sobre o hero) */
+.hero-logo-float{
+  position:absolute;
+  top:50px;              /* ← distância do topo (ajuste se quiser) */
+  left:30px;             /* ← distância da esquerda */
+  z-index:90;
+  transition:opacity .3s ease, transform .3s ease;
+  background:rgba(255,255,255,.95);
+  padding:12px 18px;
+  border-radius:12px;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
-.hero-logo img{
-  height:auto;
+.hero-logo-float img{
+  max-width:200px;       /* ← tamanho da logo flutuante */
+  max-height:120px;
   width:auto;
-  max-width:280px;   /* ← AJUSTE AQUI o tamanho da logo grande */
-  max-height:140px;  /* ← e a altura proporcional */
-  margin:0 auto;
+  height:auto;
   display:block;
+}
+/* Esconde a logo flutuante ao rolar */
+.hero-logo-float.is-hidden{
+  opacity:0;
+  transform:translateY(-20px);
+  pointer-events:none;
 }
 
 /* Sentinel invisível que dispara o IntersectionObserver */
-.scroll-sentinel{height:1px;width:100%}
+.scroll-sentinel{height:1px;width:100%;position:absolute;top:200px;left:0}
 
 /* HEADER STICKY (começa escondido, desliza ao rolar) */
 .header{
   background:#fff;
   box-shadow:0 2px 8px rgba(0,0,0,.08);
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  right:0;
   z-index:100;
   transform:translateY(-100%);
   transition:transform .35s ease;
@@ -88,7 +100,7 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 .header-content{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-img{
-  height:60px;       /* ← AJUSTE AQUI o tamanho da logo no menu sticky */
+  height:60px;
   width:auto;
   display:block;
 }
@@ -102,7 +114,7 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 /* HERO */
 .hero{position:relative;color:#fff;padding:80px 0;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,81,50,.92),rgba(15,81,50,.75)),url('https://images.unsplash.com/photo-1530267981375-f0de937f5f13?w=1600&q=80') center/cover;z-index:-1}
-.hero-content{max-width:780px}
+.hero-content{max-width:780px;position:relative;z-index:2}
 .hero h1{color:#fff;margin-bottom:1rem}
 .hero .subtitle{font-size:clamp(1.05rem,2vw,1.3rem);margin-bottom:2rem;opacity:.95}
 .hero-ctas{display:flex;gap:15px;flex-wrap:wrap;margin-top:2rem}
@@ -191,8 +203,12 @@ section{padding:70px 0}
 
 /* RESPONSIVO */
 @media(max-width:768px){
-  .hero-logo img{max-width:200px;max-height:100px}
-  .hero-logo{padding:18px 0}
+  .hero-logo-float{
+    top:45px;
+    left:15px;
+    padding:8px 12px;
+  }
+  .hero-logo-float img{max-width:130px;max-height:80px}
   .nav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,.1)}
   .nav.active{display:block}
   .nav ul{flex-direction:column;gap:15px}
@@ -202,8 +218,7 @@ section{padding:70px 0}
   section{padding:50px 0}
 }
 @media(max-width:480px){
-  .hero-logo img{max-width:170px;max-height:85px}
-  .sobre-stats{grid-template-columns:1fr;gap:15px}
+  .hero-logo-float img{max-width:110px;max-height:70px}
 }
 </style>
 </head>
@@ -217,19 +232,19 @@ section{padding:70px 0}
   </div>
 </div>
 
-<!-- ★ LOGO GRANDE NO TOPO -->
-<div class="hero-logo">
+<!-- ★ LOGO FLUTUANTE NO CANTO SUPERIOR ESQUERDO -->
+<div class="hero-logo-float" id="floatLogo">
   <a href="#" aria-label="Hidráulica AgroIndustrial - Página inicial">
     <img 
       src="https://raw.githubusercontent.com/AgroIndustria-BR/HidraulicaAgroIndustrialAbelardoLuz/refs/heads/main/logo-empresa-hidraulica-agroindustrial-png.png" 
       alt="Logo Hidráulica AgroIndustrial Abelardo Luz" 
-      width="280" 
-      height="140"
+      width="200" 
+      height="120"
       fetchpriority="high">
   </a>
 </div>
 
-<!-- Sentinel: quando sair da tela, ativa o header sticky -->
+<!-- Sentinel: posicionado após a logo flutuante, dispara troca ao rolar -->
 <div class="scroll-sentinel" id="scrollSentinel"></div>
 
 <!-- HEADER STICKY (aparece ao rolar) -->
@@ -552,21 +567,26 @@ section{padding:70px 0}
 
 <!-- SCRIPTS -->
 <script>
-// ★ HEADER STICKY APARECE AO ROLAR (IntersectionObserver — performance máxima)
+// ★ TROCA: logo flutuante some, header sticky aparece (IntersectionObserver)
 const sentinel = document.getElementById('scrollSentinel');
 const header = document.getElementById('mainHeader');
+const floatLogo = document.getElementById('floatLogo');
 
-if(sentinel && header){
-  const headerObserver = new IntersectionObserver((entries)=>{
+if(sentinel && header && floatLogo){
+  const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(!entry.isIntersecting){
+        // Saiu do topo → mostra header, esconde logo flutuante
         header.classList.add('is-visible');
+        floatLogo.classList.add('is-hidden');
       } else {
+        // Voltou ao topo → esconde header, mostra logo flutuante
         header.classList.remove('is-visible');
+        floatLogo.classList.remove('is-hidden');
       }
     });
   },{threshold:0});
-  headerObserver.observe(sentinel);
+  observer.observe(sentinel);
 }
 
 // FAQ ACCORDION
