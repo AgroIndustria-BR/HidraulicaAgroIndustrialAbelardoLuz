@@ -97,14 +97,29 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 }
 
 /* ★ LOGO FLUTUANTE — PNG SEM FUNDO, SOBREPÕE O MENU */
+/* ✅ AJUSTE: left dinâmico para acompanhar o container (max-width:1200px) */
+/* Em telas grandes acompanha a borda do container; em telas pequenas fica colado em 20px */
 .hero-logo-float{
   position:absolute;
   top:4px;
-  left:30px;
+  left:max(20px, calc((100% - 1200px) / 2 + 20px));
   z-index:110;
   transition:opacity .3s ease, transform .3s ease;
   pointer-events:auto;
 }
+.hero-logo-float img{
+  max-width:260px;
+  width:auto;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.25));
+}
+.hero-logo-float.is-hidden{
+  opacity:0;
+  transform:translateY(-20px);
+  pointer-events:none;
+}
+
 .hero-logo-float img{
   max-width:260px;
   width:auto;
@@ -551,7 +566,7 @@ section{padding:70px 0}
         <ul>
             <li><b>1980:</b> Conclusão da formação de Técnico em Mecânica Industrial (com ênfase em Hidráulica e Pneumática) no SENAI Visconde de Mauá, em Porto Alegre/RS.</li>
             <li><b>1994:</b> Conclusão do curso técnico de Sistemas Hidráulicos para Navios, Submarinos e Indústria Náutica Marítima pela ETAMERJ, no Rio de Janeiro/RJ.</li>
-            <li><b>2018:</b> Aprimoramento técnico concluído na Satic Hidráulica e Lubrificantes.</li>
+            <li><b>2018:</b> Aprimoramento técnico concluído na SATC Hidráulica e Lubrificantes.</li>
             <li><b>Bagagem:</b> Nenhuma formação valeu mais, que os +45 anos de experiência prática no ramo</li>
          </ul><br/>
         <p>A <strong>Hidráulica AgroIndustrial</strong> chegou em Abelardo Luz para resolver um problema real do produtor rural: ter atendimento técnico de qualidade que entenda de máquina agrícola, sem precisar deslocar o equipamento por horas até a cidade grande.</p>
