@@ -97,29 +97,17 @@ h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
 }
 
 /* ★ LOGO FLUTUANTE — PNG SEM FUNDO, SOBREPÕE O MENU */
-/* ✅ AJUSTE: left dinâmico para acompanhar o container (max-width:1200px) */
-/* Em telas grandes acompanha a borda do container; em telas pequenas fica colado em 20px */
+/* ✅ AJUSTE: posicionada à ESQUERDA do container, com bom respiro do conteúdo */
 .hero-logo-float{
   position:absolute;
   top:4px;
-  left:max(20px, calc((100% - 1200px) / 2 + 20px));
+  /* Em telas grandes: fica ~280px à esquerda do centro (fora do container de 1200px) */
+  /* Em telas médias: mantém 20px mínimo da borda */
+  left:max(20px, calc(50% - 660px));
   z-index:110;
   transition:opacity .3s ease, transform .3s ease;
   pointer-events:auto;
 }
-.hero-logo-float img{
-  max-width:260px;
-  width:auto;
-  height:auto;
-  display:block;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.25));
-}
-.hero-logo-float.is-hidden{
-  opacity:0;
-  transform:translateY(-20px);
-  pointer-events:none;
-}
-
 .hero-logo-float img{
   max-width:260px;
   width:auto;
